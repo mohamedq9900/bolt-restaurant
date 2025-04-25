@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply font-sans bg-gray-50 text-gray-800 min-h-screen touch-manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-semibold;
+  }
+  
+  h1 {
+    @apply text-3xl md:text-5xl;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-xl md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-lg md:text-2xl;
+  }
+  
+  h5 {
+    @apply text-base md:text-xl;
+  }
+  
+  h6 {
+    @apply text-sm md:text-lg;
+  }
+
+  /* Improve tap targets on mobile */
+  button, a {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Prevent text size adjustment on orientation change */
+  * {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 min-h-[44px] flex items-center justify-center;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 active:bg-primary-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500 active:bg-secondary-700;
+  }
+  
+  .btn-accent {
+    @apply bg-accent-600 text-white hover:bg-accent-700 focus:ring-accent-600 active:bg-accent-800;
+  }
+  
+  .btn-outline {
+    @apply bg-transparent border border-current hover:bg-gray-50 active:bg-gray-100;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg;
+  }
+  
+  .input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 min-h-[44px];
+  }
+  
+  .label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Mobile-specific components */
+  .mobile-menu {
+    @apply fixed inset-0 bg-gray-900 bg-opacity-50 z-50 transition-opacity duration-300;
+  }
+
+  .mobile-menu-content {
+    @apply fixed inset-y-0 right-0 w-4/5 max-w-sm bg-white shadow-xl transform transition-transform duration-300;
+  }
+
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 px-4 flex justify-around items-center z-40;
+  }
+
+  .bottom-nav-item {
+    @apply flex flex-col items-center justify-center text-gray-600 hover:text-primary-500 transition-colors;
+  }
+
+  .bottom-nav-icon {
+    @apply h-6 w-6 mb-1;
+  }
+
+  .bottom-nav-label {
+    @apply text-xs;
+  }
+
+  /* Mobile-optimized grid layouts */
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  /* Mobile-friendly form elements */
+  .mobile-select {
+    @apply appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 min-h-[44px];
+  }
+
+  /* Mobile touch feedback */
+  .touch-feedback {
+    @apply active:bg-gray-100 transition-colors duration-150;
+  }
+}
+
+/* RTL specific styles */
+[dir="rtl"] .input {
+  @apply text-right;
+}
+
+[dir="rtl"] .btn svg {
+  @apply mr-0 ml-2;
+}
+
+[dir="rtl"] .space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  @apply -mr-1 ml-0;
+}
+
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  @apply -mr-2 ml-0;
+}
+
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  @apply -mr-3 ml-0;
+}
+
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  @apply -mr-4 ml-0;
+}
+
+/* Mobile viewport height fix for iOS */
+.min-h-screen {
+  min-height: -webkit-fill-available;
+}
+
+/* Safe area insets support */
+@supports(padding: max(0px)) {
+  .container-custom {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .bottom-nav {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Smooth scrolling for iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent pull-to-refresh on iOS */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Fix for iOS input zoom */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
